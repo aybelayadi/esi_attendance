@@ -14,4 +14,23 @@ class StudentController extends Controller
         // Pass the students to a view
         return view('students.index', compact('students'));
     }
+
+    public function store(Request $request)
+    {
+        
+        $validatedData = $request->validate([
+            'number' => 'required|integer|unique:students,matriculation_number', // Assurez-vous que le champ est unique
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+        ]);
+
+        
+        $student = Student::create([
+            'matriculation_number' => $validatedData['number'],
+            'name' => $validatedData['first_name'] . ' ' . $validatedData['last_name'],
+        ]);
+
+        
+        return response()->json($student, 201);
+    }
 }
