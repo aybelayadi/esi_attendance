@@ -20,8 +20,8 @@ class StudentTest extends TestCase
     /** @test */
     public function it_throws_exception_when_number_is_negative()
     {
-     $this->expectException(\Exception::class);
-     Student::create(['number' => -1, 'first_name' => 'SpongeBob', 'last_name' => 'SquarePants']);
+        $this->expectException(\Exception::class);
+        Student::create(['matriculation_number' => -1, 'name' => 'SpongeBob SquarePants']);
     }
 
 

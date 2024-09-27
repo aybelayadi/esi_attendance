@@ -15,13 +15,14 @@ class StudentControllerTest extends TestCase
     public function it_can_create_a_student()
     {
         $response = $this->postJson('/api/students', [
-            'number' => 1,
+            'matriculation_number' => 1,
             'first_name' => 'SpongeBob',
             'last_name' => 'SquarePants',
         ]);
+        
 
         $response->assertStatus(201);
-        $this->assertDatabaseHas('students', ['number' => 1]);
+        $this->assertDatabaseHas('students', ['matriculation_number' => 1]);
     }
 
     /** @test */
