@@ -6,10 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('style/style.css') }}">
     <title>Student List</title>
-
-
-    
-  
 </head>
 <body>
 
@@ -19,6 +15,14 @@
             <div class="title-div">
                 <h1>List of Students</h1>
             </div>
+
+            <!-- Menu de navigation -->
+            <nav class="navbar">
+                <ul>
+                    <li><a href="{{ route('students.index') }}">Students</a></li>
+                    <li><a href="{{ route('lessons.index') }}">Lessons</a></li>
+                </ul>
+            </nav>
 
             <div class="container">
                 <form action="{{ route('students.store') }}" method="POST">
@@ -34,7 +38,6 @@
                     <p style="color:green;">{{ session('success') }}</p>
                 @endif
 
-            
                 <table>
                     <thead>
                         <tr>
@@ -63,7 +66,6 @@
             </div>
         </div>
 
-      
         <footer class="footer">
             <p>&copy; PRJG5 - Ayoub EL AYADI, Adame Meert , Ayman EL GHZAOUI</p>
         </footer>
