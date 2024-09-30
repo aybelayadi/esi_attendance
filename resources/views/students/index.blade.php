@@ -14,15 +14,13 @@
 <body>
 
     <div class="wrapper">
-        <!-- Contenu de la page -->
+        
         <div class="content">
-            <!-- Div du titre coloré -->
             <div class="title-div">
                 <h1>List of Students</h1>
             </div>
 
             <div class="container">
-                <!-- Formulaire pour ajouter un étudiant -->
                 <form action="{{ route('students.store') }}" method="POST">
                     @csrf
                     <label for="name">Name:</label>
@@ -32,12 +30,11 @@
                     <button type="submit">Add Student</button>
                 </form>
 
-                <!-- Afficher les messages de succès -->
                 @if(session('success'))
                     <p style="color:green;">{{ session('success') }}</p>
                 @endif
 
-                <!-- Tableau des étudiants -->
+            
                 <table>
                     <thead>
                         <tr>
@@ -66,7 +63,7 @@
             </div>
         </div>
 
-        <!-- Footer collé en bas de page -->
+      
         <footer class="footer">
             <p>&copy; PRJG5 - Ayoub EL AYADI, Adame Meert , Ayman EL GHZAOUI</p>
         </footer>
