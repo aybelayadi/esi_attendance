@@ -14,4 +14,30 @@ class StudentController extends Controller
         // Pass the students to a view
         return view('students.index', compact('students'));
     }
+
+    // Méthode pour ajouter un étudiant
+    public function store(Request $request)
+    {
+        // Valider les données du formulaire
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'matriculation_number' => 'required|string|max:255|unique:students',
+        ]);
+
+        // Créer un nouvel étudiant
+        Student::create($request->only('name', 'matriculation_number'));
+
+        // Rediriger vers la liste des étudiants avec un message de succès
+        return redirect()->route('students.index')->with('success', 'Student added successfully.');
+    }
+
+    // Méthode pour supprimer un étudiant
+    public function destroy(Student $student)
+    {
+        // Supprimer l'étudiant
+        $student->delete();
+
+        // Rediriger vers la liste des étudiants avec un message de succès
+        return redirect()->route('students.index')->with('success', 'Student deleted successfully.');
+    }
 }
