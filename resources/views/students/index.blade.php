@@ -49,7 +49,7 @@
                     <tbody>
                         @foreach ($students as $student)
                             <tr>
-                                <td>{{ $student->matriculation_number }}</td>
+                                <td class="student-matriculation">{{ $student->matriculation_number }}</td>
                                 <td>{{ $student->name }}</td>
                                 <td>
                                     <!-- Formulaire pour supprimer un étudiant -->
