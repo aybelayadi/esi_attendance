@@ -1,26 +1,32 @@
-stages:
-  - build
-  - test
-  - sonar
-
 variables:
-  SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Définit l'emplacement du cache de l'analyse
-  GIT_DEPTH: "0"  # Indique à Git de récupérer tous les branches pour SonarQube
-
+  SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
+  GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
 sonarcloud-check:
-  image: sonarsource/sonar-scanner-cli:latest
-  stage: sonar
+  image:
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: [""]
+  cache:
+    key: "${CI_JOB_NAME}"
+    paths:
+      - .sonar/cache
   script:
-    - sonar-scanner \
-        -Dsonar.projectKey="votre_project_key" \
-        -Dsonar.organization="votre_organisation" \
-        -Dsonar.host.url="https://sonarcloud.io" \
-        -Dsonar.login="${SONAR_TOKEN}"  # Assurez-vous que cette variable est définie dans GitLab CI/CD
+    - sonar-scanner
   only:
+    - merge_requests
     - master
     - develop
-    - merge_requests  # Exécute l'analyse pour les MR
-
-cache:
-  paths:
-    - .sonar/cache  # Cache des résultats pour optimiser les prochaines analyses
+test-job:
+  stage: test
+  image:
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: [""]
+  cache:
+    key: "${CI_JOB_NAME}"
+    paths:
+      
+.sonar/cache
+script:
+echo "Running SonarCloud analysis..."
+sonar-scanner -Dsonar.projectKey="esiatt_devops" -Dsonar.organization="esiatt" -Dsonar.sources="." -Dsonar.host.url="${SONAR_HOST_URL}" -Dsonar.login="${SONAR_TOKEN}"
+only:
+main
